@@ -9,8 +9,8 @@
 class MCPricer {
 private:
 	long _numSimul, _step;
-	double computeStep(const double& spot, const double& vol);
-	std::vector<double> simulateDiffusion(const Underlying&, const long&);
+	double computeStep(const double& spot, const double& vol, const double&);
+	std::vector<double> simulateDiffusion(const Underlying&, const long&, const double&);
 public:
 	MCPricer(const long&, const long&);
 	double price(Option);
