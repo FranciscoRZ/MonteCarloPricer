@@ -1,0 +1,2 @@
+ticker, spot, vol, risk-free, contract, exercise, maturity, strike
+MSFT, 50.0, 0.2, 0.05, call, E, 100, 60.0 
