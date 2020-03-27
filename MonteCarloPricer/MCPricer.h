@@ -13,6 +13,14 @@ class MCPricer {
 private:
 	long _numSimul, _step;
 	
+	/** method: Computes the payoff of the option contract
+	* @param option: option whose payoff we compute
+	* @param spot: the current underlying spot price at the time of 
+	* calculation
+	*
+	* @returns double: the payoff of the option contract
+	*/
+	double _payoff(const Option&, double);
 	/** method: Computes the next spot price in diffusion
 	* @param spot: spot price of underlying asset at given timestep
 	* @param vol: underlying volatility in diffusion
@@ -20,7 +28,7 @@ private:
 	*
 	* @returns double: the next spot price in the diffusion
 	*/
-	double _computeStep(const double&, const double&, const double&);
+	double _computeStep(const double&, const Underlying&, const double&);
 	
 	/** method: Simulates the entire diffusion process
 	* @param asset: the asset whose diffusion we simulate
@@ -28,7 +36,7 @@ private:
 	*
 	* @returns vector<double>: entire simulated diffusion
 	*/
-	std::vector<double> _simulateDiffusion(const Underlying&, const long&);
+	std::vector<double> _simulateDiffusion(const Option&);
 
 public:
 	/** Class constructor
@@ -38,13 +46,16 @@ public:
 	* @returns MCPricer: instance object of MCPricer class
 	*/
 	MCPricer(const long&, const long&);
-	/** method: Computes the option price
+	/** method: Computes the option price and changes the option
+	* BSprice property
 	* @param option: the contract to price
-	*
-	* @returns double: option price
 	*/
-	double price(Option);
-
+	void BSPricing(Option&);
+	/** method: Computes the option price and changes the option
+	* MCprice property
+	* @param option: the contract to price
+	*/
+	void MCPricing(Option&);
 	/** Class destructor
 	*/
 	~MCPricer() {};

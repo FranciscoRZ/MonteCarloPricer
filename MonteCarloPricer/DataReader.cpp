@@ -56,15 +56,18 @@ vector<Option> DataReader::readInput(const string& path) {
 		getline(inputFile, line);
 		while (getline(inputFile, line)) {
 			// split the data into relevant fields
-			inputLine = DataReader::split(line);
+			inputLine = split(line);
 
 			// save the data in appropriate objects 
 			Underlying asset = { atof(inputLine[3].c_str()), atof(inputLine[1].c_str()),
 								 atof(inputLine[5].c_str()), inputLine[0] };
-			OptionTypes type = inputLine[6] == "Call" ? call : put;
-			ExerciseTypes exercise = inputLine[7] == "European" ? european : american;
+			OptionTypes type = (inputLine[6] == "Call") ? call : put;
+			
 			int daysToMaturity = std::stoi(inputLine[4]);
-			Option option = { type, exercise, daysToMaturity, asset, NAN, atof(inputLine[2].c_str())};
+			double maturity = daysToMaturity / 252;
+			Barrier barrier = { false };
+			double strike = atof(inputLine[2].c_str());
+			Option option = { type, barrier, strike, daysToMaturity,maturity, asset };
 
 			// save the option to vector
 			allOptions.push_back(option);

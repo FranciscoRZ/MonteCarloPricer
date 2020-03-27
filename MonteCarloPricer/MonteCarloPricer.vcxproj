@@ -151,11 +151,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BlackScholesFunctions.cpp" />
     <ClCompile Include="DataReader.cpp" />
     <ClCompile Include="MCPricer.cpp" />
     <ClCompile Include="MonteCarloPricer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BlackScholesFunctions.h" />
     <ClInclude Include="DataReader.h" />
     <ClInclude Include="MCPricer.h" />
     <ClInclude Include="Option.h" />
