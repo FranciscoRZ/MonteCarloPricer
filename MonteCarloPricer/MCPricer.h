@@ -30,9 +30,6 @@ private:
 	*/
 	std::vector<double> _simulateDiffusion(const Underlying&, const long&);
 
-	/** Class destructor 
-	*/
-	~MCPricer() {};
 public:
 	/** Class constructor
 	* @param _numSimul: Number of simulations to run
@@ -46,7 +43,11 @@ public:
 	*
 	* @returns double: option price
 	*/
-	double price(Option); 
+	double price(Option);
+
+	/** Class destructor
+	*/
+	~MCPricer() {};
 };
 
 #endif // !GUARD_MC_Pricer_h

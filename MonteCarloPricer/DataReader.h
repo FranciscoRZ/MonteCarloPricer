@@ -29,7 +29,7 @@ private:
 	DataReader() {};
 	/** Class destructor 
 	*/
-	DataReader() {};
+	~DataReader() {};
 public:
 	/** static method: reads the input file with the information on options to price
 	* @param: path to the input file
