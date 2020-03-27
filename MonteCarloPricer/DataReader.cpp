@@ -12,15 +12,15 @@ using std::string;		using std::vector;
 using std::ifstream;	using std::cout;
 using std::endl;
 
-bool not_delim(const char& c) {
+bool DataReader::not_delim(const char& c) {
 	return (c != ';');
 }
 
-bool delim(const char & c) {
+bool DataReader::delim(const char & c) {
 	return (c == ';');
 }
 
-vector<string> split(const string& line) {
+vector<string> DataReader::split(const string& line) {
 	vector<string> ret;
 	typedef std::string::const_iterator iter;
 	iter i = line.begin();
@@ -43,7 +43,7 @@ vector<string> split(const string& line) {
 	return ret;
 }
 
-vector<Option> readInput(const string& path) {
+vector<Option> DataReader::readInput(const string& path) {
 	
 	// define local variables
 	vector<Option> allOptions;
@@ -56,7 +56,7 @@ vector<Option> readInput(const string& path) {
 		getline(inputFile, line);
 		while (getline(inputFile, line)) {
 			// split the data into relevant fields
-			inputLine = split(line);
+			inputLine = DataReader::split(line);
 
 			// save the data in appropriate objects 
 			Underlying asset = { atof(inputLine[3].c_str()), atof(inputLine[1].c_str()),
@@ -64,7 +64,7 @@ vector<Option> readInput(const string& path) {
 			OptionTypes type = inputLine[6] == "Call" ? call : put;
 			ExerciseTypes exercise = inputLine[7] == "European" ? european : american;
 			int daysToMaturity = std::stoi(inputLine[4]);
-			Option option = { type, exercise, daysToMaturity, asset, NAN };
+			Option option = { type, exercise, daysToMaturity, asset, NAN, atof(inputLine[2].c_str())};
 
 			// save the option to vector
 			allOptions.push_back(option);

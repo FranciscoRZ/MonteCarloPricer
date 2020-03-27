@@ -1,4 +1,3 @@
-
 #include "MCPricer.h"
 #include <math.h>
 #include <cmath>
@@ -12,7 +11,7 @@ MCPricer::MCPricer(const long& numSimul, const long& step) {
 	this->_step = step;
 }
 
-double MCPricer::computeStep(const double& spot, const double& vol, 
+double MCPricer::_computeStep(const double& spot, const double& vol, 
 							 const double& rf) {
 	std::default_random_engine generator;
 	std::normal_distribution<double> distribution(0.0, 1.0);
@@ -21,12 +20,11 @@ double MCPricer::computeStep(const double& spot, const double& vol,
 						+ sqrt(this->_step) * vol * rnd);
 }
 
-vector<double> MCPricer::simulateDiffusion(const Underlying& asset, const long& daysToMaturity, 
-										   const double& rf) {
+vector<double> MCPricer::_simulateDiffusion(const Underlying& asset, const long& daysToMaturity) {
 	vector<double> diffusion;
 	double spot = asset.spot;
 	for (int i = 0; i != this->_step * daysToMaturity; ++i) {
-		diffusion.push_back(this->computeStep(spot, asset.vol, rf));
+		diffusion.push_back(this->_computeStep(spot, asset.vol, asset.rfRate));
 		spot = *diffusion.end();
 	}
 	return diffusion;

@@ -20,6 +20,7 @@ struct Option {
 	int daysToMaturity;
 	Underlying asset;
 	double price;
+	double strike;
 };
 
 #endif // !define GUARD_Option_h

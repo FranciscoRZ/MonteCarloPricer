@@ -34,7 +34,7 @@ int main()
 	
 	// Read the input file with the information on options to price and store in appropriate options
 	string path = "input.csv";
-	vector<Option> allOptions = readInput(path);
+	vector<Option> allOptions = DataReader::readInput(path);
 	
 	// Instanciate the Monte Carlo Pricer
 	MCPricer pricer = MCPricer(numSimul, numStepsPerDay);
